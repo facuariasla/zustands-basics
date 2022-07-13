@@ -8,6 +8,8 @@ function App() {
   const friends = useStore((state) => state.friends);
   const addToFriends = useStore((state) => state.addToFriends);
 
+  const removeUserFromFriends = useStore((state)=> state.removeUserFromFriends)
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -19,7 +21,7 @@ function App() {
       <div>
         <ul>
           {users?.map((el) => (
-            <li onClick={() => addToFriends(el)} key={Math.random() * 999}>
+            <li onClick={() => addToFriends(el)} key={el.id}>
               {el.name}
             </li>
           ))}
@@ -30,10 +32,13 @@ function App() {
       <div>
         <h2>Friends ({friends.length})</h2>
         <div>
-          <ul style={{color: 'green'}}>
-          {friends?.map((el) => (
-            <li key={el.id}>{el.name}</li>
-          ))}
+          <ul style={{ color: "green" }}>
+            {friends?.map((el) => (
+              <li key={el.id}>
+                {el.name} 
+                <button onClick={()=>removeUserFromFriends(el.id)}>X</button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

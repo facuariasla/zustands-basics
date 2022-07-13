@@ -14,6 +14,11 @@ const createUserSlice = (set, get) => ({
       // a la misma persona a la lista de 'friends'
       friends: [...new Set([...get().friends, user])],
     })
+  },
+  removeUserFromFriends: (userId) =>{
+    set({
+      friends: get().friends.filter(friend => friend.id !== userId),
+    })
   }
 });
 
